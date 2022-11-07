@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
+
 *{
     margin: 0;padding: 0;
     box-sizing: border-box;
@@ -5,16 +7,23 @@
 
 :root{
     --black: #272425;
-    --red: #ff3541;
+    --red: #BA0018;
+    --white: #e4e4e4;
 
     /* FONTS  */
-    --1: clamp(.1rem, 10rem , 100px)
+    --3: clamp(1px, 1.5rem , 15px);
+    --4: clamp(1px, 1.8rem , 18px);
+    --5: clamp(1px, 3rem , 30px);
+    --9: clamp(1px, 8rem , 80px);
+    --10: clamp(1px, 10rem , 100px);
 }
 
 
 body, html{
     font-size: 62.5%;
     background: radial-gradient(var(--black) 40%, black);
+    overflow-x: hidden;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 .container{
@@ -40,6 +49,7 @@ body, html{
     width: 40%;
     margin-left: 8rem;
     object-fit: contain;
+    filter: saturate(0%) brightness(5);
 }
 .container-page-one header .assets{
     width: 75%;
@@ -48,20 +58,75 @@ body, html{
     place-items: center;
     background: url(https://i.ibb.co/9nv3tnF/Captura-de-tela-de-2022-11-05-14-25-43-removebg-preview-Editado.png) no-repeat;
     background-size: 15%;
-    opacity: .5;
 }
 
 .container-page-one header .assets .trianble-design{
     width: 6rem;
     height: 6rem;
-    background-color: red;
-    outline: 2px solid red;
+    background-color: var(--red);
+    outline: 2px solid var(--red);
     outline-offset: 15px;
     transform: rotate(45deg);
     position: absolute;
     top: -3rem;
     right: 26rem;
 }
+
+.container-page-one header .assets nav {
+    width: 100%;
+}
+.container-page-one header .assets nav ul{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.container-page-one header .assets nav ul a{
+    font-size: var(--4);
+    color: white;
+    margin: 1rem 2rem;
+    font-weight: bold;
+    text-decoration: none;
+    opacity: .6;
+    position: relative;
+    transition: opacity 400ms;
+}
+.container-page-one header .assets nav ul a.active,
+.container-page-one header .assets nav ul a:hover{
+    opacity: 1;
+}
+.container-page-one header .assets nav ul a.active::after{
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--white);
+    opacity: 1;
+}
+.container-page-one header .assets nav ul a:hover:not(nav ul a:last-of-type)::after{
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--white);
+    opacity: 1;
+}
+
+
+.container-page-one header .assets nav ul a:last-of-type{
+    color: var(--white);
+    background-color: var(--red);
+    padding: .5rem;
+    border-radius: 1rem;
+    margin-left: auto;
+}
+
+
+/* SECTION  */
 .container-page-one section{
     width: 100%;
     height: calc(100vh - 14rem);
@@ -76,7 +141,7 @@ body, html{
 
 .container-page-one section .content-text h2{
     color: transparent;
-    font-size: var(--1);
+    font-size: var(--10);
     font-family: sans-serif;
     -webkit-text-stroke-width: .3rem;
     -webkit-text-stroke-color: white;
@@ -84,13 +149,77 @@ body, html{
     text-align: center;
     line-height: 9rem;
     width: 100%;
-
 }
+.container-page-one section .content-text h3{
+    color: var(--white);
+    font-size: var(--5);
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.container-page-one section .content-text h3 hr{
+    width: 25%;
+    height: 2px;
+}
+
+.container-page-one section .content-text p, 
+.container-page-one section .content-text h4{
+    color: var(--white);
+    font-size: var(--4);
+    text-align: center;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.container-page-one section .content-text .half-products{
+    width: 40%;
+    height: 30vh;
+    overflow: hidden;
+
+    position: absolute;
+    bottom: -5vh;
+    left: 8rem;
+}
+.container-page-one section .content-text .content-half-product{
+    display: flex;
+    margin-top: 2rem;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+}
+.container-page-one section .content-text .content-half-product .box-half-product{
+    border-radius: 1rem;
+    width: calc(100% / 3.1);
+    border: 1px solid var(--red);
+    overflow: hidden;
+}
+
+.container-page-one section .content-text .content-half-product .box-half-product img{
+    width: 100%;
+    height: 200%;
+    object-fit: contain;
+}
+
 
 .container-page-one section .content-image{
     width: 50%;
     height: 100%;
 }
+
+
+.container-page-one section .content-image .ball-img{
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    background: linear-gradient(to right , transparent 40%, #BA001860);
+    box-shadow: 10px 5px 10px #BA001830;
+}
+
 
 
 .container-page-one section  .content-image img{
