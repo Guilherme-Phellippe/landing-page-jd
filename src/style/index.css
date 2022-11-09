@@ -24,6 +24,7 @@ body, html{
     background: radial-gradient(var(--black) 40%, black);
     overflow-x: hidden;
     font-family: 'Roboto Condensed', sans-serif;
+    overflow: hidden;
 }
 
 .container{
@@ -134,9 +135,15 @@ body, html{
     background: url(https://i.ibb.co/wpJFfbf/Design-sem-nome-3-Photo-Room-1.png) no-repeat ;
     background-size: cover;    
     display: flex;
+    overflow: hidden;
 }
 .container-page-one section .content-text{
     width: 50%;
+    transition: transform 1s ease;
+}
+
+.container-page-one section .content-text.scroll{
+    transform: translateX(-100%);
 }
 
 .container-page-one section .content-text h2{
@@ -150,6 +157,7 @@ body, html{
     line-height: 9rem;
     width: 100%;
 }
+
 .container-page-one section .content-text h3{
     color: var(--white);
     font-size: var(--5);
@@ -177,38 +185,46 @@ body, html{
 .container-page-one section .content-text .half-products{
     width: 40%;
     height: 30vh;
-    overflow: hidden;
-
     position: absolute;
     bottom: -5vh;
     left: 8rem;
+    overflow: hidden;
 }
+
 .container-page-one section .content-text .content-half-product{
     display: flex;
-    margin-top: 2rem;
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
     height: 100%;
-    border-radius: 1rem;
+    margin-top: 2rem;
+    padding: 1rem;
 }
 .container-page-one section .content-text .content-half-product .box-half-product{
-    border-radius: 1rem;
-    width: calc(100% / 3.1);
-    border: 1px solid var(--red);
+    width: calc(100% / 3.2);
+    min-height: 30rem;
+    border: 2px solid var(--black);
+    outline: 2px solid var(--red);
     overflow: hidden;
+    border-radius: 1rem;
 }
 
 .container-page-one section .content-text .content-half-product .box-half-product img{
     width: 100%;
     height: 200%;
     object-fit: contain;
+    opacity: .6;
 }
 
 
 .container-page-one section .content-image{
     width: 50%;
     height: 100%;
+    transition: transform 1s ease;
+}
+
+.container-page-one section .content-image.scroll{
+    transform: translateX(100%);
 }
 
 
@@ -220,8 +236,69 @@ body, html{
     box-shadow: 10px 5px 10px #BA001830;
 }
 
-
-
 .container-page-one section  .content-image img{
+    object-fit: contain;
+}
+
+
+/* CONTAINER PAGE 2  */
+
+
+.container-page-two{
+    background-color: var(--black);
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(var(--black) 40%, black);
+}
+
+.container-page-two section.products-low-price{
+    width: 100%;
+    height: 70%;
+    display: flex;
+}
+
+.container-page-two section.products-low-price .content-image-products{
+    width: 40%;
+    height: 100%;
+    background: url(https://i.ibb.co/7GSp3Hx/Design-sem-nome-9-removebg-preview.png) no-repeat;
+
+}
+
+.container-page-two section.products-low-price .content-image-products img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* CONTENT PRODUCTS  */
+.container-page-two section.products-low-price .content-products {
+    width: 60%;
+    height: 100%;
+}
+
+.container-page-two section.products-low-price .content-products h2{
+    color: var(--white);
+    font-size: var(--5);
+    margin: 1rem;
+    width: 100%;
+    text-align: center;
+}
+.container-page-two section.products-low-price .content-products .content-product{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;
+}
+.container-page-two section.products-low-price .content-products .box-product{
+    width: 20%;
+    height: 10rem;
+    margin: 1rem .5rem;
+    overflow: hidden;
+}
+
+.container-page-two section.products-low-price .content-products .box-product img{
+    width: 100%;
+    height: 100%;
     object-fit: contain;
 }
