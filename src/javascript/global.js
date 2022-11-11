@@ -8,3 +8,10 @@ export function transformArrayMySql(sql) {
         throw console.error("Não é permitido passar parâmetros nulos a função")
     }
 }
+
+export function formatTextLong(text, size) {
+    var newText = text;
+    if (text.length >= size) newText = String(text).substring(0, size) + "..."
+    return newText
+}
+
