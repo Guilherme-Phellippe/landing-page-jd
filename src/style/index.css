@@ -1,11 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
 
-*{
-    margin: 0;padding: 0;
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
-:root{
+:root {
     --background: radial-gradient(var(--black) 40%, black);
     --black: #272425;
     --red: #BA0018;
@@ -13,24 +14,29 @@
     --white-o6: #e4e4e460;
 
     /* FONTS  */
-    --1: clamp(1px, 1rem , 10px);
-    --2: clamp(1px, 1.2rem , 12px);
-    --3: clamp(1px, 1.5rem , 15px);
-    --4: clamp(1px, 1.8rem , 18px);
-    --5: clamp(1px, 3rem , 30px);
-    --9: clamp(1px, 8rem , 80px);
-    --10: clamp(1px, 10rem , 100px);
+    --1: clamp(1px, 1rem, 10px);
+    --2: clamp(1px, 1.2rem, 12px);
+    --3: clamp(1px, 1.5rem, 15px);
+    --4: clamp(1px, 1.8rem, 18px);
+    --5: clamp(1px, 2.5rem, 25px);
+    --6: clamp(3px, 3rem, 30px);
+    --6A: clamp(4px, 4rem, 40px);
+    --7: clamp(5px, 5.5rem, 55px);
+    --8: clamp(1px, 7rem, 70px);
+    --9: clamp(1px, 8rem, 80px);
+    --10: clamp(1px, 10rem, 100px);
 }
 
 
-body, html{
+body,
+html {
     font-size: 62.5%;
     background: var(--background);
     overflow-x: hidden;
     font-family: 'Roboto Condensed', sans-serif;
 }
 
-.container{
+.container {
     width: 100vw;
     height: auto;
     max-width: 1600px;
@@ -38,24 +44,32 @@ body, html{
     margin: 0 auto;
 }
 
-.container-page-one header{
+.container-page-one{
+    overflow: hidden;
+    position: relative;
+}
+
+.container-page-one header {
     width: 100%;
     height: 14rem;
     display: flex;
     position: relative;
 }
-.container-page-one header .logo{
+
+.container-page-one header .logo {
     width: 26rem;
     height: 100%;
     display: flex;
 }
-.container-page-one header .logo img{
+
+.container-page-one header .logo img {
     width: 40%;
     margin-left: 8rem;
     object-fit: contain;
     filter: saturate(0%) brightness(5);
 }
-.container-page-one header .assets{
+
+.container-page-one header .assets {
     width: 75%;
     height: 100%;
     display: grid;
@@ -64,7 +78,7 @@ body, html{
     background-size: 15%;
 }
 
-.container-page-one header .assets .trianble-design{
+.container-page-one header .assets .trianble-design {
     width: 6rem;
     height: 6rem;
     background-color: var(--red);
@@ -79,13 +93,20 @@ body, html{
 .container-page-one header .assets nav {
     width: 100%;
 }
-.container-page-one header .assets nav ul{
+
+.container-page-one header .assets nav .menu-mobile {
+    display: none;
+
+}
+
+.container-page-one header .assets nav ul {
     width: 90%;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
-.container-page-one header .assets nav ul a{
+
+.container-page-one header .assets nav ul a {
     font-size: var(--4);
     color: white;
     margin: 1rem 2rem;
@@ -95,11 +116,13 @@ body, html{
     position: relative;
     transition: opacity 400ms;
 }
+
 .container-page-one header .assets nav ul a.active,
-.container-page-one header .assets nav ul a:hover{
+.container-page-one header .assets nav ul a:hover {
     opacity: 1;
 }
-.container-page-one header .assets nav ul a.active::after{
+
+.container-page-one header .assets nav ul a.active::after {
     content: '';
     position: absolute;
     bottom: -4px;
@@ -109,7 +132,8 @@ body, html{
     background-color: var(--white);
     opacity: 1;
 }
-.container-page-one header .assets nav ul a:hover:not(nav ul a:last-of-type)::after{
+
+.container-page-one header .assets nav ul a:hover:not(nav ul a:last-of-type)::after {
     content: '';
     position: absolute;
     bottom: -4px;
@@ -121,7 +145,7 @@ body, html{
 }
 
 
-.container-page-one header .assets nav ul a:last-of-type{
+.container-page-one header .assets nav ul a:last-of-type {
     color: var(--white);
     background-color: var(--red);
     padding: .5rem;
@@ -132,25 +156,26 @@ body, html{
 
 
 /* SECTION  */
-.container-page-one section{
+.container-page-one section {
     width: 100%;
     height: calc(100vh - 14rem);
     padding: 4rem 8rem;
-    background: url(https://i.ibb.co/wpJFfbf/Design-sem-nome-3-Photo-Room-1.png) no-repeat ;
-    background-size: cover;    
+    background: url(https://i.ibb.co/wpJFfbf/Design-sem-nome-3-Photo-Room-1.png) no-repeat;
+    background-size: cover;
     display: flex;
     overflow: hidden;
 }
-.container-page-one section .content-text{
+
+.container-page-one section .content-text {
     width: 50%;
     transition: transform 1s ease-out;
 }
 
-.container-page-one section .content-text.scroll{
+.container-page-one section .content-text.scroll {
     transform: translateX(-100%);
 }
 
-.container-page-one section .content-text h2{
+.container-page-one section .content-text h2 {
     color: transparent;
     font-size: var(--10);
     font-family: sans-serif;
@@ -162,7 +187,7 @@ body, html{
     width: 100%;
 }
 
-.container-page-one section .content-text h3{
+.container-page-one section .content-text h3 {
     color: var(--white);
     font-size: var(--5);
     text-align: center;
@@ -172,13 +197,13 @@ body, html{
     align-items: center;
 }
 
-.container-page-one section .content-text h3 hr{
+.container-page-one section .content-text h3 hr {
     width: 25%;
     height: 2px;
 }
 
-.container-page-one section .content-text p, 
-.container-page-one section .content-text h4{
+.container-page-one section .content-text p,
+.container-page-one section .content-text h4 {
     color: var(--white);
     font-size: var(--4);
     text-align: center;
@@ -186,7 +211,7 @@ body, html{
     margin: 1rem 0;
 }
 
-.container-page-one section .content-text .half-products{
+.container-page-one section .content-text .half-products {
     width: 40%;
     height: 30vh;
     position: absolute;
@@ -196,7 +221,7 @@ body, html{
     clip-path: polygon(0 0, 100% 0, 100% 80%, 0 80%);
 }
 
-.container-page-one section .content-text .content-half-product{
+.container-page-one section .content-text .content-half-product {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -205,7 +230,8 @@ body, html{
     margin-top: 2rem;
     padding: 1rem;
 }
-.container-page-one section .content-text .content-half-product .box-half-product{
+
+.container-page-one section .content-text .content-half-product .box-half-product {
     width: calc(100% / 3.2);
     min-height: 30rem;
     border: 2px solid var(--black);
@@ -214,7 +240,7 @@ body, html{
     border-radius: 1rem;
 }
 
-.container-page-one section .content-text .content-half-product .box-half-product img{
+.container-page-one section .content-text .content-half-product .box-half-product img {
     width: 100%;
     height: 200%;
     object-fit: contain;
@@ -222,26 +248,25 @@ body, html{
 }
 
 
-.container-page-one section .content-image{
+.container-page-one section .content-image {
     width: 50%;
     height: 100%;
     transition: transform 1s ease-out;
 }
 
-.container-page-one section .content-image.scroll{
+.container-page-one section .content-image.scroll {
     transform: translateX(100%);
 }
 
-
-.container-page-one section .content-image .ball-img{
+.container-page-one section .content-image .ball-img {
     width: 100%;
     height: 100%;
     border-radius: 100%;
-    background: linear-gradient(to right , transparent 40%, #BA001860);
+    background: linear-gradient(to right, transparent 40%, #BA001860);
     box-shadow: 10px 5px 10px #BA001830;
 }
 
-.container-page-one section  .content-image img{
+.container-page-one section .content-image img {
     object-fit: contain;
 }
 
@@ -249,7 +274,7 @@ body, html{
 /* CONTAINER PAGE 2  */
 
 
-.container-page-two{
+.container-page-two {
     background-color: var(--black);
     width: 100vw;
     height: 150vh;
@@ -257,20 +282,20 @@ body, html{
     background: var(--background)
 }
 
-.container-page-two section.products-low-price{
+.container-page-two section.products-low-price {
     width: 100%;
     height: 60%;
     display: flex;
 }
 
-.container-page-two section.products-low-price .content-image-products{
+.container-page-two section.products-low-price .content-image-products {
     width: 40%;
     height: 100%;
     background: url(https://i.ibb.co/7GSp3Hx/Design-sem-nome-9-removebg-preview.png) no-repeat;
 
 }
 
-.container-page-two section.products-low-price .content-image-products img{
+.container-page-two section.products-low-price .content-image-products img {
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -283,7 +308,7 @@ body, html{
     margin-left: 5%;
 }
 
-.container-page-two section.products-low-price .content-products h2{
+.container-page-two section.products-low-price .content-products h2 {
     color: var(--white);
     font-size: var(--5);
     margin: 4rem 0;
@@ -291,7 +316,7 @@ body, html{
     text-align: center;
 }
 
-.container-page-two section.products-low-price .content-products h2 span{
+.container-page-two section.products-low-price .content-products h2 span {
     font-size: var(--5);
     background-color: var(--red);
     border-radius: 50%;
@@ -299,13 +324,45 @@ body, html{
 }
 
 
-.container-page-two section.products-low-price .content-products .content-all-products{
-    border-radius: 1rem;
-    overflow-x: auto;
+.container-page-two section.products-low-price .content-products .content-all-products {
     display: flex;
 }
 
-.container-page-two section.products-low-price .content-products .content-all-products .box-product{
+.container-page-two section.products-low-price .content-products .content-all-products button {
+    width: 3rem;
+    opacity: .1;
+    border: none;
+    background: linear-gradient(to right, #27242550 30%, var(--white-o6));
+    cursor: pointer;
+    transition: opacity 300ms linear;
+    color: var(--white);
+    font-size: var(--5);
+    border-radius: 1rem;
+}
+
+.container-page-two section.products-low-price .content-products .content-all-products button.button-left {
+    background: linear-gradient(to left, #27242550 30%, var(--white-o6));
+}
+
+
+.container-page-two section.products-low-price .content-products .content-all-products button:hover {
+    opacity: .7;
+}
+
+
+.container-page-two section.products-low-price .content-products .content-all-products .box-all-products {
+    border-radius: 1rem;
+    overflow-x: auto;
+    display: flex;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+}
+
+.container-page-two section.products-low-price .content-products .content-all-products .box-all-products::-webkit-scrollbar {
+    display: none;
+}
+
+.container-page-two section.products-low-price .content-products .content-all-products .box-all-products .box-product {
     width: 15rem;
     min-width: 35%;
     height: 25rem;
@@ -320,25 +377,26 @@ body, html{
     justify-content: flex-start;
     cursor: pointer;
     border-radius: 1rem;
+    scroll-snap-align: center;
 }
 
-.container-page-two section.products-low-price .content-products .content-all-products .box-product:hover{
+.container-page-two section.products-low-price .content-products .content-all-products .box-all-products .box-product:hover {
     opacity: 1;
 }
 
-.container-page-two section.products-low-price .content-products .content-all-products .box-product .box-img{
+.container-page-two section.products-low-price .content-products .content-all-products .box-all-products .box-product .box-img {
     width: 100%;
     height: 50%;
     background-color: red;
 }
 
-.container-page-two section.products-low-price .content-products .content-all-products .box-product .box-img img{
+.container-page-two section.products-low-price .content-products .content-all-products .box-all-products .box-product .box-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.container-page-two section.products-low-price .content-products .content-all-products .box-product .black-just-text{
+.container-page-two section.products-low-price .content-products .content-all-products .box-all-products .box-product .black-just-text {
     width: 110%;
     text-align: center;
     background-color: black;
@@ -346,14 +404,15 @@ body, html{
     padding: .5rem;
     font-size: var(--2);
     text-transform: uppercase;
-    transform: rotate(8deg) translate(-5px , 0px);
+    transform: rotate(8deg) translate(-5px, 0px);
 }
 
-.container-page-two section.products-low-price .content-products .content-all-products .box-product .black-just-text.two{
-    transform: rotate(-8deg) translate(-5px , -25px);;
+.container-page-two section.products-low-price .content-products .content-all-products .box-all-products .box-product .black-just-text.two {
+    transform: rotate(-8deg) translate(-5px, -25px);
+    ;
 }
 
-.container-page-two section.products-low-price .content-products .content-all-products .box-product h3{
+.container-page-two section.products-low-price .content-products .content-all-products .box-all-products .box-product h3 {
     display: block;
     margin: 0 auto;
     font-size: var(--3);
@@ -363,13 +422,14 @@ body, html{
     padding: .2rem .4rem;
     border-radius: .5rem;
 }
-.container-page-two section.products-low-price .content-products .content-all-products .box-product h3.old-price{
+
+.container-page-two section.products-low-price .content-products .content-all-products .box-all-products .box-product h3.old-price {
     text-decoration: line-through;
     font-size: var(--2);
 }
 
 
-.container-page-two section.products-low-price .content-products .content-all-products .box-product h2{
+.container-page-two section.products-low-price .content-products .content-all-products .box-all-products .box-product h2 {
     font-size: var(--2);
     margin: .5rem 0;
 }
@@ -377,30 +437,32 @@ body, html{
 
 /* SECTIONS GIFTS  */
 
-section.gifts{
+section.gifts {
     width: 100%;
     height: 30%;
 }
 
-section.gifts h2{
+section.gifts h2 {
     width: 100%;
     text-align: center;
     font-size: var(--5);
     color: var(--white);
 }
-section.gifts p{
+
+section.gifts p {
     width: 100%;
     text-align: center;
     font-size: var(--3);
     color: var(--white);
 }
 
-section.gifts .content-gifts{
+section.gifts .content-gifts {
     width: 100%;
     display: flex;
     justify-content: center;
 }
-section.gifts .content-gifts .box-gift{
+
+section.gifts .content-gifts .box-gift {
     width: 15rem;
     height: 15rem;
     margin: 1rem;
@@ -412,32 +474,34 @@ section.gifts .content-gifts .box-gift{
     opacity: .8;
 }
 
-section.gifts .content-gifts .box-gift.active .head-gift{
+section.gifts .content-gifts .box-gift.active .head-gift {
     animation: rotate 100ms alternate-reverse infinite;
 }
 
-section.gifts .content-gifts .box-gift.active.boom .head-gift{
+section.gifts .content-gifts .box-gift.active.boom .head-gift {
     animation: boom 600ms ease forwards;
 }
 
 
 @keyframes rotate {
-    from{
+    from {
         transform: rotate(10deg);
-    }to{
+    }
+
+    to {
         transform: rotate(-5deg);
     }
 }
 
 
 @keyframes boom {
-    to{
+    to {
         transform: translateY(-100vh);
         opacity: .5;
     }
 }
 
-section.gifts .content-gifts .head-gift{
+section.gifts .content-gifts .head-gift {
     background-color: royalblue;
     width: 85%;
     height: 20%;
@@ -448,8 +512,8 @@ section.gifts .content-gifts .head-gift{
 }
 
 
-section.gifts .content-gifts .head-gift .details-head{
-    background:var(--red);
+section.gifts .content-gifts .head-gift .details-head {
+    background: var(--red);
     width: 50%;
     height: 70%;
     position: absolute;
@@ -458,18 +522,19 @@ section.gifts .content-gifts .head-gift .details-head{
     clip-path: polygon(50% 0, 65% 36%, 92% 44%, 68% 57%, 100% 100%, 44% 100%, 0 100%, 32% 57%, 3% 43%, 35% 34%);
 }
 
-section.gifts .content-gifts .body-gift{
+section.gifts .content-gifts .body-gift {
     width: 80%;
     height: 60%;
     display: grid;
     place-items: center;
     background: repeating-linear-gradient(60deg, rgb(249, 249, 77) 10px, var(--white) 15px, rgb(241, 46, 46) 25px);
 }
-section.gifts .content-gifts .body-gift h3{
+
+section.gifts .content-gifts .body-gift h3 {
     max-width: 60%;
     padding: .5rem;
     text-align: center;
-    color:var(--white);
+    color: var(--white);
     background-color: #272425;
     font-size: var(--3);
     border-radius: .5rem;
@@ -478,7 +543,7 @@ section.gifts .content-gifts .body-gift h3{
 
 /* MODAL GIFT  */
 
-section.gifts .modal-gift{
+section.gifts .modal-gift {
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -488,16 +553,16 @@ section.gifts .modal-gift{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: url(https://acegif.com/wp-content/uploads/gif/confetti-10.gif), var(--background) ;
+    background: url(https://acegif.com/wp-content/uploads/gif/confetti-10.gif), var(--background);
 
 }
 
-section.gifts .modal-gift section{
+section.gifts .modal-gift section {
     width: 100%;
     display: flex;
 }
 
-section.gifts .modal-gift section .content-img{
+section.gifts .modal-gift section .content-img {
     width: 50%;
     height: 100%;
     display: flex;
@@ -505,12 +570,12 @@ section.gifts .modal-gift section .content-img{
     align-items: flex-end;
 }
 
-section.gifts .modal-gift section .content-img .ball{
+section.gifts .modal-gift section .content-img .ball {
     width: 100%;
     height: 100%;
     position: absolute;
     top: -50%;
-    left:-50%;
+    left: -50%;
     border-radius: 50%;
     opacity: 1;
     z-index: -1;
@@ -519,7 +584,7 @@ section.gifts .modal-gift section .content-img .ball{
     transition: all 600ms ease-in;
 }
 
-section.gifts .modal-gift section .content-img .ball.active{
+section.gifts .modal-gift section .content-img .ball.active {
     width: 100vw;
     height: 100vw;
     left: 0;
@@ -529,14 +594,97 @@ section.gifts .modal-gift section .content-img .ball.active{
     z-index: 1;
 }
 
+.products-ball-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
-section.gifts .modal-gift section .content-img img{
+.products-ball-list h2 {
+    margin: 2rem 0;
+}
+
+.products-ball-list .list-products {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    max-width: 90%;
+    overflow-x: hidden;
+}
+
+.products-ball-list .list-products .box-product {
+    width: 15rem;
+    min-width: 22%;
+    height: 25rem;
+    min-height: 40%;
+    margin: 1rem .5rem;
+    overflow: hidden;
+    opacity: .8;
+    border: 1px solid var(--white-o6);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    cursor: pointer;
+    border-radius: 1rem;
+}
+
+
+.products-ball-list .list-products .box-product:hover {
+    opacity: 1;
+}
+
+.products-ball-list .list-products .box-product .box-img {
+    width: 100%;
+    height: 50%;
+    background-color: red;
+}
+
+.products-ball-list .list-products .box-product .box-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.products-ball-list .list-products .box-product .black-just-text {
+    width: 110%;
+    text-align: center;
+    background-color: black;
+    color: var(--white);
+    padding: .5rem;
+    font-size: var(--2);
+    text-transform: uppercase;
+    transform: rotate(8deg) translate(-5px, 0px);
+}
+
+.products-ball-list .list-products .box-product .black-just-text.two {
+    transform: rotate(-8deg) translate(-5px, -25px);
+}
+
+.products-ball-list .list-products .box-product h3 {
+    display: block;
+    margin: 0 auto;
+    font-size: var(--3);
+    color: var(--white);
+    text-align: center;
+    background-color: var(--red);
+    padding: .2rem .4rem;
+    border-radius: .5rem;
+}
+
+.products-ball-list .list-products .box-product h3.old-price {
+    text-decoration: line-through;
+    font-size: var(--2);
+}
+
+section.gifts .modal-gift section .content-img img {
     width: 90%;
     height: 90%;
     object-fit: contain;
 }
 
-section.gifts .modal-gift section .content-cupom{
+section.gifts .modal-gift section .content-cupom {
     width: 50%;
     height: 100%;
     display: flex;
@@ -545,7 +693,7 @@ section.gifts .modal-gift section .content-cupom{
     justify-content: center;
 }
 
-section.gifts .modal-gift section .content-cupom h3{
+section.gifts .modal-gift section .content-cupom h3 {
     width: 100%;
     text-align: center;
     font-size: var(--5);
@@ -553,7 +701,7 @@ section.gifts .modal-gift section .content-cupom h3{
     margin: 2rem;
 }
 
-section.gifts .modal-gift section .cart-cupom{
+section.gifts .modal-gift section .cart-cupom {
     width: 80%;
     height: 25%;
     min-height: 20rem;
@@ -563,11 +711,11 @@ section.gifts .modal-gift section .cart-cupom{
 }
 
 
-section.gifts .modal-gift section .cart-cupom:hover{
+section.gifts .modal-gift section .cart-cupom:hover {
     transform: rotate3d(1, 1, 0, 30deg);
 }
 
-section.gifts .modal-gift section .cart-cupom .side-left{
+section.gifts .modal-gift section .cart-cupom .side-left {
     width: 35%;
     height: 100%;
     border: 1px solid var(--red);
@@ -577,14 +725,14 @@ section.gifts .modal-gift section .cart-cupom .side-left{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to left,  var(--black), black 80%);
+    background: linear-gradient(to left, var(--black), black 80%);
 }
 
-section.gifts .modal-gift section .cart-cupom .side-left::after{
+section.gifts .modal-gift section .cart-cupom .side-left::after {
     content: '';
     width: 20px;
     height: 100%;
-    background-color: black ;
+    background-color: black;
     position: absolute;
     top: 0px;
     left: -20px;
@@ -592,7 +740,7 @@ section.gifts .modal-gift section .cart-cupom .side-left::after{
 }
 
 
-section.gifts .modal-gift section .cart-cupom .side-left i{
+section.gifts .modal-gift section .cart-cupom .side-left i {
     width: 50%;
     margin: .5rem;
     text-align: center;
@@ -604,12 +752,12 @@ section.gifts .modal-gift section .cart-cupom .side-left i{
 }
 
 
-section.gifts .modal-gift section .cart-cupom .side-left h3{
+section.gifts .modal-gift section .cart-cupom .side-left h3 {
     color: white;
 }
 
 
-section.gifts .modal-gift section .cart-cupom .side-right{
+section.gifts .modal-gift section .cart-cupom .side-right {
     width: 65%;
     height: 100%;
     overflow: hidden;
@@ -621,10 +769,11 @@ section.gifts .modal-gift section .cart-cupom .side-right{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background:  linear-gradient(to right,  var(--black), black 80%);
+    background: linear-gradient(to right, var(--black), black 80%);
 
 }
-section.gifts .modal-gift section .cart-cupom .side-right img{
+
+section.gifts .modal-gift section .cart-cupom .side-right img {
     width: 50%;
     height: 50%;
     display: block;
@@ -632,13 +781,14 @@ section.gifts .modal-gift section .cart-cupom .side-right img{
     object-fit: contain;
 }
 
-section.gifts .modal-gift section .cart-cupom .side-right .cupom{
+section.gifts .modal-gift section .cart-cupom .side-right .cupom {
     color: var(--white);
     width: 100%;
     margin: 1rem;
     font-size: var(--4);
 }
-section.gifts .modal-gift section .cart-cupom .side-right .cupom code{
+
+section.gifts .modal-gift section .cart-cupom .side-right .cupom code {
     color: var(--white);
     width: 60%;
     border: 1px solid var(--white);
@@ -650,29 +800,29 @@ section.gifts .modal-gift section .cart-cupom .side-right .cupom code{
     justify-content: space-between;
 }
 
-section.gifts .modal-gift section .cart-cupom .side-right code button{
+section.gifts .modal-gift section .cart-cupom .side-right code button {
     cursor: pointer;
 }
 
-section.gifts .modal-gift section .content-cupom > button{
+section.gifts .modal-gift section .content-cupom>button {
     padding: 1rem 3rem;
     border: 1px solid var(--red);
     border-radius: 1rem;
-    background: linear-gradient(45deg, var(--black) , black);
+    background: linear-gradient(45deg, var(--black), black);
     color: var(--white);
     cursor: pointer;
     transition: background 2s ease;
 }
 
 
-section.gifts .modal-gift section .content-cupom > button:hover{
-    background: linear-gradient(90deg, var(--black) , black);
+section.gifts .modal-gift section .content-cupom>button:hover {
+    background: linear-gradient(90deg, var(--black), black);
     box-shadow: 1px 1px 10px black;
 }
 
 
 
-button#top-page{
+button#top-page {
     position: fixed;
     bottom: 1rem;
     right: 1rem;

@@ -14,6 +14,8 @@ const global = {};
     saveCupom();
     showListProducts();
     redirectForProductPage();
+    scrollProducts();
+    openMobileMenu();
 })();
 
 
@@ -28,16 +30,16 @@ async function createHalfListProductHome() {
             let div_product = document.createElement('div');
             div_product.setAttribute('class', "content-half-product");
 
-            const newProduct = products.data.filter(ob => {return ob.price <= 9.90})
+            const newProduct = products.data.filter(ob => { return ob.price <= 9.99 })
 
             for (let n = 0; n < 3; n++) {
-                if(newProduct[n]){
+                if (newProduct[n]) {
                     let div_img = document.createElement('div');
                     let img_product = document.createElement('img');
-    
+
                     div_img.setAttribute('class', "box-half-product");
                     img_product.src = transformArrayMySql(newProduct[n].images)[0]
-                    
+
                     div_img.appendChild(img_product)
                     div_product.appendChild(div_img)
                 }
@@ -48,16 +50,15 @@ async function createHalfListProductHome() {
     } else console.error("Not have products for show")
 }
 
-
 function scrollingTwoPage() {
     const page1 = document.querySelector(".container-page-one");
     const page2 = document.querySelector(".container-page-two");
+    const header = document.querySelector(".container-page-one header");
 
-    page1.addEventListener("wheel", (e) => {
-        goPage2();
-    })
+    page1.addEventListener("wheel", goPage2)
 
     function goPage2() {
+        header.classList.add("fixed")
 
         const contentText = document.querySelector("div.content-text")
         const contentImage = document.querySelector("div.content-image")
@@ -78,13 +79,14 @@ function redirectForTopPage() {
     const contentText = document.querySelector("div.content-text")
     const page1 = document.querySelector(".container-page-one");
     const button = document.querySelector("button#top-page");
+    const header = document.querySelector(".container-page-one header");
 
     button.addEventListener("click", () => {
+        header.classList.remove("fixed")
         contentText.querySelector(".half-products").style.display = "block"
         page1.scrollIntoView({ behavior: "smooth" })
     })
 }
-
 
 async function fillListProductsOffen() {
     const products = global.products ?? await getProducts();
@@ -92,17 +94,28 @@ async function fillListProductsOffen() {
     if (products.data.length) {
         const container = document.querySelector('div.content-all-products');
         if (container) {
+            const contentProduct = document.createElement("div");
+            const buttonLeft = document.createElement("button");
+            const buttonRight = document.createElement("button");
 
             const newProduct = products.data.filter(ob => {
-                return ob.price <= 9.90
-            })
+                return ob.price <= 9.99
+            });
+
+            buttonLeft.setAttribute("class", "button-left")
+            contentProduct.setAttribute("class", "box-all-products");
+            buttonRight.setAttribute("class", "button-right")
+
+            buttonLeft.innerHTML = '<i class="fa-sharp fa-solid fa-caret-left"></i>'
+            buttonRight.innerHTML = '<i class="fa-solid fa-caret-right"></i>'
+
 
             for (let product of newProduct) {
                 let div_product = document.createElement('div');
                 let div_img = document.createElement('div');
                 let img_product = document.createElement('img');
-                let black_just = document.createElement("p")
-                let black_just2 = document.createElement("p")
+                let black_just = document.createElement("p");
+                let black_just2 = document.createElement("p");
                 let h2 = document.createElement("h2");
                 let h3_old_price = document.createElement("h3");
                 let h3_new_price = document.createElement("h3");
@@ -131,12 +144,16 @@ async function fillListProductsOffen() {
                 div_product.appendChild(h3_old_price)
                 div_product.appendChild(h3_new_price)
                 div_product.appendChild(h2)
-                container.appendChild(div_product);
+                contentProduct.appendChild(div_product);
             }
+            container.appendChild(buttonLeft)
+            container.appendChild(contentProduct);
+            container.appendChild(buttonRight)
 
         }
     } else console.error("Not have products for show")
 }
+
 
 function giveGift() {
     const gifts = document.querySelectorAll("div.box-gift");
@@ -175,7 +192,7 @@ function saveCupom() {
     if (!cpm) {
         button.addEventListener("click", () => {
             button.textContent = "Copiado!"
-            localStorage.setItem("__cpm", "win50")
+            localStorage.setItem("__cpm", JSON.stringify(["win50", 0]))
         })
     } else {
         button.textContent = "Copiado!"
@@ -201,44 +218,119 @@ function showListProducts() {
 
                 container.style.display = "flex"
 
-                const newProduct = global.products.data.filter(ob => {return ob.price > 9.90})
+                const newProduct = global.products.data.filter(ob => { return ob.price > 9.90 })
+
+                const boxListProducts = document.createElement("div");
+                const h2_title = document.querySelector("h2");
+
+
+                boxListProducts.setAttribute("class", "list-products");
+
+                h2_title.textContent = "Use seu presente em qualquer produto"
 
                 for (let product of newProduct) {
                     let div_product = document.createElement('div');
                     let div_img = document.createElement('div');
                     let img_product = document.createElement('img');
                     let black_just = document.createElement("p")
+                    let black_just2 = document.createElement("p")
                     let h2 = document.createElement("h2");
-                    let h3 = document.createElement("h3");
+                    let h3_old_price = document.createElement("h3");
+                    let h3_new_price = document.createElement("h3");
 
                     div_product.setAttribute('class', "box-product");
+                    div_product.setAttribute('id', product.id);
+
                     div_img.setAttribute('class', "box-img");
                     black_just.setAttribute("class", "black-just-text")
+                    black_just2.setAttribute("class", "black-just-text two")
+                    h3_old_price.setAttribute('class', "old-price")
+
 
                     img_product.src = transformArrayMySql(product.images)[0];
-                    black_just.textContent = "É Black na Just"
-                    h2.textContent = product.name_product
-                    h3.textContent = "Apenas R$" + product.price.toFixed(2).replace(".", ",")
+                    black_just.textContent = "É Black Friday Just Dream"
+                    black_just2.textContent = "É Black Friday"
+                    h2.textContent = formatTextLong(product.name_product, 25)
+                    h3_old_price.textContent = "de R$" + product.old_price.toFixed(2).replace(".", ",")
+                    h3_new_price.textContent = "por apenas R$" + product.price.toFixed(2).replace(".", ",")
 
-                    div_product.appendChild(black_just)
+
                     div_img.appendChild(img_product)
-                    div_product.appendChild(black_just)
                     div_product.appendChild(div_img)
+                    div_product.appendChild(black_just)
+                    div_product.appendChild(black_just2)
+                    div_product.appendChild(h3_old_price)
+                    div_product.appendChild(h3_new_price)
                     div_product.appendChild(h2)
-                    div_product.appendChild(h3)
-                    container.appendChild(div_product);
-                }
+                    boxListProducts.appendChild(div_product)
+                };
+
+                container.appendChild(h2_title)
+                container.appendChild(boxListProducts)
             }
 
-        }
+        };
+
+
+        // chama a função para redirecionar os produtos da container ball para pagina de produtos jd
+        redirectBallForProductPage();
     })
 
 }
 
-function redirectForProductPage(){
+function redirectForProductPage() {
     const boxProducts = document.querySelectorAll(".content-all-products .box-product");
 
-    boxProducts.forEach(p => p.addEventListener("click", ()=>{
+    boxProducts.forEach(p => p.addEventListener("click", () =>
         window.location.href = `https://justdream.com.br/product.html?p=${p.querySelector("h2").textContent}&id=${p.id}`
+    ));
+}
+
+function redirectBallForProductPage(){
+    const boxBallProducts = document.querySelectorAll(".list-products .box-product")
+
+    boxBallProducts.forEach(p => p.addEventListener("click", () =>
+    window.location.href = `http://localhost:5501/product.html?p=${p.querySelector("h2").textContent}&id=${p.id}&cpm=available&cpmid=3`
+));
+}
+
+function scrollProducts(){
+    const container = document.querySelector("div.box-all-products")
+    const buttonLeft = document.querySelectorAll("button.button-left");
+    const buttonRight = document.querySelectorAll("button.button-right");
+
+
+    buttonLeft.forEach(btn => btn.addEventListener("click", () =>{
+        container.scroll(-300, 0);
+        if(container.scrollLeft == 0) buttonLeft.forEach(btn => btn.style.display = 'none');
+
+    }))
+    buttonRight.forEach(btn => btn.addEventListener("click", () =>{
+        container.scroll(300, 0);
+
+    }))
+}
+
+function openMobileMenu(){
+    const menu = document.querySelector("nav ul");
+    const btnMenu = document.querySelector("nav .menu-mobile");
+    const header = document.querySelector(".container-page-one header");
+    const aLinks = document.querySelectorAll(".assets nav ul a");
+
+    document.addEventListener("wheel" , () =>{
+        if(window.scrollY > 200) header.classList.add("fixed");
+    })
+
+    btnMenu.addEventListener("click", ()=>{
+        header.classList.toggle("fixed");
+        menu.classList.toggle('open');
+        btnMenu.classList.toggle("close")
+    });
+
+    aLinks.forEach(a => a.addEventListener("click" , () => {
+        header.classList.toggle("fixed")
+        menu.classList.toggle('open');
+        btnMenu.classList.toggle("close")
     }));
+
 }
