@@ -130,7 +130,7 @@ async function fillListProductsOffen() {
 
 
                 img_product.src = transformArrayMySql(product.images)[0];
-                black_just.textContent = "É Black Friday Just Dream"
+                black_just.textContent = "É Black Friday Just"
                 black_just2.textContent = "É Black Friday"
                 h2.textContent = formatTextLong(product.name_product, 25)
                 h3_old_price.textContent = "de R$" + product.old_price.toFixed(2).replace(".", ",")
