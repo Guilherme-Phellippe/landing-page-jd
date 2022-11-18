@@ -1,5 +1,6 @@
 import { getProducts } from "./api.js";
 import { formatTextLong, transformArrayMySql } from "./global.js";
+import { loading } from '../components/loading.js'
 
 
 const global = {};
@@ -35,12 +36,12 @@ async function createHalfListProductHome() {
             for (let n = 0; n < 3; n++) {
                 if (newProduct[n]) {
                     let div_img = document.createElement('div');
-                    let img_product = document.createElement('img');
+                    // let img_product = document.createElement('img');
 
                     div_img.setAttribute('class', "box-half-product");
-                    img_product.src = transformArrayMySql(newProduct[n].images)[0]
+                    // img_product.src = transformArrayMySql(newProduct[n].images)[0]
 
-                    div_img.appendChild(img_product)
+                    // div_img.appendChild(img_product)
                     div_product.appendChild(div_img)
                 }
             }
@@ -202,7 +203,8 @@ function saveCupom() {
 
 function showListProducts() {
     const button = document.querySelector("button#show-list");
-    const ball = document.querySelector("div.content-img .ball")
+    const ball = document.querySelector("div.content-img .ball");
+    const gif = document.querySelector("section.gifts .modal-gift")
 
     button.addEventListener("click", () => {
         const cpm = localStorage.getItem("__cpm");
@@ -210,14 +212,12 @@ function showListProducts() {
         if (!cpm) {
             alert("Você ainda não pegou seu cupom!")
         } else {
+            gif.style.background = 'none'
+            loading().add(button)
             const container = ball.querySelector(".products-ball-list")
-            ball.classList.add("active")
-            showListProducts();
+            // showListProducts();
 
             if (container) {
-
-                container.style.display = "flex"
-
                 const newProduct = global.products.data.filter(ob => { return ob.price > 9.90 })
 
                 const boxListProducts = document.createElement("div");
@@ -267,7 +267,12 @@ function showListProducts() {
 
                 container.appendChild(h2_title)
                 container.appendChild(boxListProducts)
+
             }
+            container.style.display = "flex"
+            ball.classList.add("active")
+            loading().remove(button)
+
 
         };
 
@@ -281,53 +286,57 @@ function showListProducts() {
 function redirectForProductPage() {
     const boxProducts = document.querySelectorAll(".content-all-products .box-product");
 
-    boxProducts.forEach(p => p.addEventListener("click", () =>
+    boxProducts.forEach(p => p.addEventListener("click", () =>{
+        loading().add(p);
         window.location.href = `https://justdream.com.br/product.html?p=${p.querySelector("h2").textContent}&id=${p.id}`
-    ));
+        loading().remove(p)
+    }));
 }
 
-function redirectBallForProductPage(){
+function redirectBallForProductPage() {
     const boxBallProducts = document.querySelectorAll(".list-products .box-product")
 
-    boxBallProducts.forEach(p => p.addEventListener("click", () =>
-    window.location.href = `http://localhost:5501/product.html?p=${p.querySelector("h2").textContent}&id=${p.id}&cpm=available&cpmid=3`
-));
+    boxBallProducts.forEach(p => p.addEventListener("click", () => {
+        loading().add(p);
+        window.location.href = `https://justdream.com.br/product.html?p=${p.querySelector("h2").textContent}&id=${p.id}&cpm=available&cpmid=3`
+        loading().remove(p)
+    }));
 }
 
-function scrollProducts(){
+function scrollProducts() {
     const container = document.querySelector("div.box-all-products")
     const buttonLeft = document.querySelectorAll("button.button-left");
     const buttonRight = document.querySelectorAll("button.button-right");
 
 
-    buttonLeft.forEach(btn => btn.addEventListener("click", () =>{
+    buttonLeft.forEach(btn => btn.addEventListener("click", () => {
         container.scroll(-300, 0);
-        if(container.scrollLeft == 0) buttonLeft.forEach(btn => btn.style.display = 'none');
+        if (container.scrollLeft == 0) buttonLeft.forEach(btn => btn.style.display = 'none');
 
     }))
-    buttonRight.forEach(btn => btn.addEventListener("click", () =>{
+    buttonRight.forEach(btn => btn.addEventListener("click", () => {
         container.scroll(300, 0);
 
     }))
 }
 
-function openMobileMenu(){
+function openMobileMenu() {
     const menu = document.querySelector("nav ul");
     const btnMenu = document.querySelector("nav .menu-mobile");
     const header = document.querySelector(".container-page-one header");
     const aLinks = document.querySelectorAll(".assets nav ul a");
 
-    document.addEventListener("wheel" , () =>{
-        if(window.scrollY > 200) header.classList.add("fixed");
+    document.addEventListener("wheel", () => {
+        if (window.scrollY > 200) header.classList.add("fixed");
     })
 
-    btnMenu.addEventListener("click", ()=>{
+    btnMenu.addEventListener("click", () => {
         header.classList.toggle("fixed");
         menu.classList.toggle('open');
         btnMenu.classList.toggle("close")
     });
 
-    aLinks.forEach(a => a.addEventListener("click" , () => {
+    aLinks.forEach(a => a.addEventListener("click", () => {
         header.classList.toggle("fixed")
         menu.classList.toggle('open');
         btnMenu.classList.toggle("close")
