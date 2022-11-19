@@ -133,7 +133,7 @@ async function fillListProductsOffen() {
                 img_product.src = transformArrayMySql(product.images)[0];
                 black_just.textContent = "É Black Friday Just"
                 black_just2.textContent = "É Black Friday"
-                h2.textContent = formatTextLong(product.name_product, 25)
+                h2.textContent = formatTextLong(product.name_product, 35)
                 h3_old_price.textContent = "de R$" + product.old_price.toFixed(2).replace(".", ",")
                 h3_new_price.textContent = "por apenas R$" + product.price.toFixed(2).replace(".", ",")
 
@@ -218,63 +218,88 @@ function showListProducts() {
             // showListProducts();
 
             if (container) {
-                const newProduct = global.products.data.filter(ob => { return ob.price > 9.90 })
 
                 const boxListProducts = document.createElement("div");
                 const h2_title = document.querySelector("h2");
+                const info1 = document.querySelector("h3");
+                const boxBestProducts = document.createElement("div");
+                const listProducts = document.createElement("div");
+                const info2 = document.querySelector("h3");
 
-
+                boxBestProducts.setAttribute("class", "best-products");
                 boxListProducts.setAttribute("class", "list-products");
 
                 h2_title.textContent = "Use seu presente em qualquer produto"
+                info1.textContent = "Os mais buscados da semana"
+                info2.textContent = "Busque algo do seu interesse"
 
+                const newProduct = global.products.data.filter(ob => { return ob.price > 50 });
                 for (let product of newProduct) {
-                    let div_product = document.createElement('div');
-                    let div_img = document.createElement('div');
-                    let img_product = document.createElement('img');
-                    let black_just = document.createElement("p")
-                    let black_just2 = document.createElement("p")
-                    let h2 = document.createElement("h2");
-                    let h3_old_price = document.createElement("h3");
-                    let h3_new_price = document.createElement("h3");
-
-                    div_product.setAttribute('class', "box-product");
-                    div_product.setAttribute('id', product.id);
-
-                    div_img.setAttribute('class', "box-img");
-                    black_just.setAttribute("class", "black-just-text")
-                    black_just2.setAttribute("class", "black-just-text two")
-                    h3_old_price.setAttribute('class', "old-price")
-
-
-                    img_product.src = transformArrayMySql(product.images)[0];
-                    black_just.textContent = "É Black Friday Just Dream"
-                    black_just2.textContent = "É Black Friday"
-                    h2.textContent = formatTextLong(product.name_product, 25)
-                    h3_old_price.textContent = "de R$" + product.old_price.toFixed(2).replace(".", ",")
-                    h3_new_price.textContent = "por apenas R$" + product.price.toFixed(2).replace(".", ",")
-
-
-                    div_img.appendChild(img_product)
-                    div_product.appendChild(div_img)
-                    div_product.appendChild(black_just)
-                    div_product.appendChild(black_just2)
-                    div_product.appendChild(h3_old_price)
-                    div_product.appendChild(h3_new_price)
-                    div_product.appendChild(h2)
-                    boxListProducts.appendChild(div_product)
+                    boxListProducts.appendChild(createElement(product))
                 };
 
+                const bestProduct = newProduct.sort((a, b) => { return a.price < b.price ? -1 : a.price > b.price ? 1 : 0; })
+                    for (let n = 0; n < 3; n++) {
+                    const product = createElement(bestProduct[n], true);
+                    listProducts.appendChild(product)
+                }
+
+
                 container.appendChild(h2_title)
-                container.appendChild(boxListProducts)
+                container.appendChild(info1)
+                boxBestProducts.appendChild(listProducts)
+                container.appendChild(boxBestProducts)
+                container.appendChild(info2)
+                container.appendChild(boxListProducts);
+
 
             }
-            container.style.display = "flex"
             ball.classList.add("active")
+            container.style.display = "flex"
             loading().remove(button)
+            overFlowBlack();
 
 
         };
+
+        function createElement(product, isOpen) {
+            let div_product = document.createElement('div');
+            let div_img = document.createElement('div');
+            let img_product = document.createElement('img');
+            let black_just = document.createElement("p")
+            let h2 = document.createElement("h2");
+            let h3_old_price = document.createElement("h3");
+            let h3_new_price = document.createElement("h3");
+            let h3_installments = document.createElement("h3");
+            let show_more = document.createElement("button");
+
+            div_product.setAttribute('class', "box-product");
+            div_product.setAttribute('id', product.id);
+
+            div_img.setAttribute('class', "box-img");
+            black_just.setAttribute("class", "black-just-text")
+            h3_old_price.setAttribute('class', "old-price")
+            h3_installments.setAttribute('class', "installments")
+
+
+
+            img_product.src = transformArrayMySql(product.images)[0];
+            black_just.textContent = "É Black Friday Just Dream"
+            h2.textContent = formatTextLong(product.name_product, 45)
+            h3_old_price.textContent = "de R$" + product.old_price.toFixed(2).replace(".", ",")
+            h3_new_price.innerHTML = "por apenas R$ <span> " + product.price.toFixed(2).replace('.', ',') + "</span>"
+            h3_installments.textContent = "ou 6x R$" + (product.price / 6).toFixed(2).replace('.', ",") + " sem juros"
+            show_more.textContent = "Saiba mais"
+
+            div_img.appendChild(img_product)
+            div_product.appendChild(div_img)
+            div_product.appendChild(black_just)
+            div_product.appendChild(h2)
+            div_product.appendChild(h3_old_price)
+            div_product.appendChild(h3_new_price)
+            div_product.appendChild(h3_installments)
+            return div_product
+        }
 
 
         // chama a função para redirecionar os produtos da container ball para pagina de produtos jd
@@ -286,7 +311,7 @@ function showListProducts() {
 function redirectForProductPage() {
     const boxProducts = document.querySelectorAll(".content-all-products .box-product");
 
-    boxProducts.forEach(p => p.addEventListener("click", () =>{
+    boxProducts.forEach(p => p.addEventListener("click", () => {
         loading().add(p);
         window.location.href = `https://justdream.com.br/product.html?p=${p.querySelector("h2").textContent}&id=${p.id}`
         loading().remove(p)

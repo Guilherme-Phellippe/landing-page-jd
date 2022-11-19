@@ -425,6 +425,11 @@
         font-size: var(--2);
     }
 
+    .products-ball-list .list-products,
+    .products-ball-list .best-products {
+        width: 100%;
+    }
+
 
 }
 

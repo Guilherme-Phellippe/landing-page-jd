@@ -39,7 +39,7 @@ html {
 
 
 @keyframes loading {
-    to{
+    to {
         transform: rotate(180deg);
     }
 }
@@ -52,7 +52,7 @@ html {
     margin: 0 auto;
 }
 
-.container-page-one{
+.container-page-one {
     overflow: hidden;
     position: relative;
 }
@@ -168,7 +168,6 @@ html {
     width: 100%;
     height: calc(100vh - 14rem);
     padding: 4rem 8rem;
-    background: url(https://i.ibb.co/wpJFfbf/Design-sem-nome-3-Photo-Room-1.png) no-repeat;
     background-size: cover;
     display: flex;
     overflow: hidden;
@@ -263,7 +262,7 @@ html {
 }
 
 @keyframes moving {
-    to{
+    to {
         opacity: 1;
         bottom: .1rem;
         right: .1rem;
@@ -442,7 +441,7 @@ html {
 
 .container-page-two section.products-low-price .content-products .content-all-products .box-all-products .box-product .black-just-text.two {
     transform: rotate(-8deg) translate(-5px, -25px);
-    
+
 }
 
 .container-page-two section.products-low-price .content-products .content-all-products .box-all-products .box-product h3 {
@@ -633,21 +632,64 @@ section.gifts .modal-gift section .content-img .ball.active {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(to bottom, black , var(--black));
 }
 
-.products-ball-list h2 {
+.products-ball-list>h2 {
+    margin-top: 2rem;
+}
+
+.products-ball-list>h3 {
     margin: 2rem 0;
+    color: var(--white);
+    font-size: var(--4);
 }
 
-.products-ball-list .list-products {
+.products-ball-list .list-products,
+.products-ball-list .best-products {
     display: flex;
     justify-content: center;
     flex-flow: row wrap;
-    max-width: 100%;
+    width: 80%;
     overflow-x: hidden;
+    margin: 4rem 0
 }
 
-.products-ball-list .list-products .box-product {
+.products-ball-list .best-products {
+    padding: 2rem;
+    width: 100%;
+    height: 70vh;
+}
+
+.products-ball-list .best-products > div{
+    padding: 2rem;
+    width: auto;
+    height:100%;
+    display: inline-flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.products-ball-list .best-products .box-product{
+    min-width: 18rem;
+    opacity: 1;
+    border: none;
+    transform: perspective(800px) rotateY(20deg);
+    transition: transform 300ms linear;
+    -webkit-box-reflect: below 1px linear-gradient(transparent, transparent , #0004) ;
+}
+
+.products-ball-list .best-products:hover .box-product{
+    opacity: .25;
+}  
+
+.products-ball-list .best-products .box-product:hover{
+    opacity: 1;
+    transform: perspective(800px) rotateY(0);
+    border: 1px solid var(--white-o6);
+}  
+
+.products-ball-list .box-product {
     width: 15rem;
     min-width: 22%;
     height: 25rem;
@@ -665,57 +707,73 @@ section.gifts .modal-gift section .content-img .ball.active {
 }
 
 
-.products-ball-list .list-products .box-product:hover {
+.products-ball-list .box-product:hover {
     opacity: 1;
 }
 
-.products-ball-list .list-products .box-product .box-img {
+.products-ball-list .box-product .box-img {
     width: 100%;
     height: 50%;
+    transition: all 1s ease-out;
 }
 
-.products-ball-list .list-products .box-product .box-img img {
+.products-ball-list .box-product .box-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.products-ball-list .list-products .box-product .black-just-text {
+.products-ball-list .box-product .black-just-text {
     width: 110%;
     text-align: center;
     background-color: black;
     color: var(--white);
     padding: .5rem;
     font-size: var(--2);
+    font-weight: bold;
     text-transform: uppercase;
-    transform: rotate(8deg) translate(-5px, 0px);
 }
 
-.products-ball-list .list-products .box-product .black-just-text.two {
-    transform: rotate(-8deg) translate(-5px, -25px);
-}
-
-.products-ball-list .list-products .box-product h3 {
+.products-ball-list .box-product h3 {
     display: block;
-    margin: 0 auto;
     font-size: var(--3);
     color: var(--white);
     text-align: center;
-    background-color: var(--red);
     padding: .2rem .4rem;
     border-radius: .5rem;
 }
 
-.products-ball-list .list-products .box-product h3.old-price {
-    text-decoration: line-through;
-    font-size: var(--2);
+.products-ball-list .box-product h3 span {
+    background-color: var(--red);
+    padding: .2rem .5rem;
+    border-radius: .5rem;
 }
 
-section.gifts .modal-gift section .content-img > div:first-of-type {
+.products-ball-list .box-product h3.old-price {
+    text-decoration: line-through;
+    font-size: var(--2);
+    background-color: transparent;
+}
+
+.products-ball-list .box-product h3.installments {
+    font-size: var(--2);
+    background-color: transparent;
+}
+
+.products-ball-list .box-product h2 {
+    display: block;
+    margin: .5rem auto;
+    font-size: var(--2);
+    text-align: center;
+    opacity: .7;
+}
+
+section.gifts .modal-gift section .content-img>div:first-of-type {
     width: 80%;
     height: 50%;
 }
-section.gifts .modal-gift section .content-img > div:first-of-type img {
+
+section.gifts .modal-gift section .content-img>div:first-of-type img {
     width: 100%;
     height: 100%;
     object-fit: contain;
