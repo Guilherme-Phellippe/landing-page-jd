@@ -239,9 +239,10 @@ function showListProducts() {
                 };
 
                 const bestProduct = newProduct.sort((a, b) => { return a.price < b.price ? -1 : a.price > b.price ? 1 : 0; })
-                    for (let n = 0; n < 3; n++) {
+                for (let n = 0; n < 3; n++) {
                     const product = createElement(bestProduct[n], true);
-                    listProducts.appendChild(product)
+                    if (n == 1) product.classList.add("active")
+                    listProducts.appendChild(product);
                 }
 
 
@@ -254,15 +255,13 @@ function showListProducts() {
 
 
             }
+            activeBestProducts();
             ball.classList.add("active")
             container.style.display = "flex"
             loading().remove(button)
-            overFlowBlack();
-
-
         };
 
-        function createElement(product, isOpen) {
+        function createElement(product) {
             let div_product = document.createElement('div');
             let div_img = document.createElement('div');
             let img_product = document.createElement('img');
@@ -332,17 +331,10 @@ function scrollProducts() {
     const container = document.querySelector("div.box-all-products")
     const buttonLeft = document.querySelectorAll("button.button-left");
     const buttonRight = document.querySelectorAll("button.button-right");
+    
 
-
-    buttonLeft.forEach(btn => btn.addEventListener("click", () => {
-        container.scroll(-300, 0);
-        if (container.scrollLeft == 0) buttonLeft.forEach(btn => btn.style.display = 'none');
-
-    }))
-    buttonRight.forEach(btn => btn.addEventListener("click", () => {
-        container.scroll(300, 0);
-
-    }))
+    buttonLeft.forEach(btn => btn.addEventListener("click", () => container.scroll(-300, 0)))
+    buttonRight.forEach(btn => btn.addEventListener("click", () => container.scroll(300, 0)))
 }
 
 function openMobileMenu() {
@@ -366,5 +358,30 @@ function openMobileMenu() {
         menu.classList.toggle('open');
         btnMenu.classList.toggle("close")
     }));
+
+}
+
+function activeBestProducts() {
+    const products = document.querySelectorAll(".best-products .box-product");
+    const container = document.querySelector(".best-products > div");
+
+    setTimeout(() => container.scroll(100, 0), 100); 
+    
+    products.forEach(product => product.addEventListener("mousemove", (e) => {
+        products.forEach(p => p.classList.remove("active"))
+        if(e.currentTarget == product) product.classList.add("active")
+    }));
+
+
+    products.forEach(product => product.addEventListener("mouseout", (e) => {
+        if(e.currentTarget == product) product.classList.remove("active")
+    }));
+
+    products.forEach(product => product.addEventListener("click", () => {
+        loading().add(product);
+        window.location.href = `https://justdream.com.br/product.html?p=${product.querySelector("h2").textContent}&id=${product.id}&cpm=available&cpmid=3`
+        loading().remove(product)
+    }));
+
 
 }

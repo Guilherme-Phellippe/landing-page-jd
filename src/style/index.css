@@ -659,31 +659,33 @@ section.gifts .modal-gift section .content-img .ball.active {
     padding: 2rem;
     width: 100%;
     height: 70vh;
+
 }
 
 .products-ball-list .best-products > div{
     padding: 2rem;
-    width: auto;
     height:100%;
-    display: inline-flex;
-    overflow-x: auto;
     overflow-y: hidden;
+    overflow-x: auto;
+    display: flex;
+    scroll-snap-type: x mandatory;
 }
 
 .products-ball-list .best-products .box-product{
     min-width: 18rem;
-    opacity: 1;
+    opacity: .6;
     border: none;
     transform: perspective(800px) rotateY(20deg);
     transition: transform 300ms linear;
     -webkit-box-reflect: below 1px linear-gradient(transparent, transparent , #0004) ;
+    scroll-snap-align: center;
 }
 
 .products-ball-list .best-products:hover .box-product{
     opacity: .25;
 }  
 
-.products-ball-list .best-products .box-product:hover{
+.products-ball-list .best-products .box-product.active{
     opacity: 1;
     transform: perspective(800px) rotateY(0);
     border: 1px solid var(--white-o6);
