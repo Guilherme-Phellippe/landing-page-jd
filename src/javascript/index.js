@@ -207,59 +207,53 @@ function showListProducts() {
     const gif = document.querySelector("section.gifts .modal-gift")
 
     button.addEventListener("click", () => {
-        const cpm = localStorage.getItem("__cpm");
+        gif.style.background = 'none'
+        loading().add(button)
+        const container = ball.querySelector(".products-ball-list")
+        // showListProducts();
 
-        if (!cpm) {
-            alert("Você ainda não pegou seu cupom!")
-        } else {
-            gif.style.background = 'none'
-            loading().add(button)
-            const container = ball.querySelector(".products-ball-list")
-            // showListProducts();
+        if (container) {
 
-            if (container) {
+            const boxListProducts = document.createElement("div");
+            const h2_title = document.querySelector("h2");
+            const info1 = document.querySelector("h3");
+            const boxBestProducts = document.createElement("div");
+            const listProducts = document.createElement("div");
+            const info2 = document.querySelector("h3");
 
-                const boxListProducts = document.createElement("div");
-                const h2_title = document.querySelector("h2");
-                const info1 = document.querySelector("h3");
-                const boxBestProducts = document.createElement("div");
-                const listProducts = document.createElement("div");
-                const info2 = document.querySelector("h3");
+            boxBestProducts.setAttribute("class", "best-products");
+            boxListProducts.setAttribute("class", "list-products");
 
-                boxBestProducts.setAttribute("class", "best-products");
-                boxListProducts.setAttribute("class", "list-products");
+            h2_title.textContent = "Use seu presente em qualquer produto"
+            info1.textContent = "Os mais buscados da semana"
+            info2.textContent = "Busque algo do seu interesse"
 
-                h2_title.textContent = "Use seu presente em qualquer produto"
-                info1.textContent = "Os mais buscados da semana"
-                info2.textContent = "Busque algo do seu interesse"
+            const newProduct = global.products.data.filter(ob => { return ob.price > 50 });
+            for (let product of newProduct) {
+                boxListProducts.appendChild(createElement(product))
+            };
 
-                const newProduct = global.products.data.filter(ob => { return ob.price > 50 });
-                for (let product of newProduct) {
-                    boxListProducts.appendChild(createElement(product))
-                };
-
-                const bestProduct = newProduct.sort((a, b) => { return a.price < b.price ? -1 : a.price > b.price ? 1 : 0; })
-                for (let n = 0; n < 3; n++) {
-                    const product = createElement(bestProduct[n], true);
-                    if (n == 1) product.classList.add("active")
-                    listProducts.appendChild(product);
-                }
-
-
-                container.appendChild(h2_title)
-                container.appendChild(info1)
-                boxBestProducts.appendChild(listProducts)
-                container.appendChild(boxBestProducts)
-                container.appendChild(info2)
-                container.appendChild(boxListProducts);
-
-
+            const bestProduct = newProduct.sort((a, b) => { return a.price < b.price ? -1 : a.price > b.price ? 1 : 0; })
+            for (let n = 0; n < 3; n++) {
+                const product = createElement(bestProduct[n], true);
+                if (n == 1) product.classList.add("active")
+                listProducts.appendChild(product);
             }
-            activeBestProducts();
-            ball.classList.add("active")
-            container.style.display = "flex"
-            loading().remove(button)
-        };
+
+
+            container.appendChild(h2_title)
+            container.appendChild(info1)
+            boxBestProducts.appendChild(listProducts)
+            container.appendChild(boxBestProducts)
+            container.appendChild(info2)
+            container.appendChild(boxListProducts);
+
+
+        }
+        activeBestProducts();
+        ball.classList.add("active")
+        container.style.display = "flex"
+        loading().remove(button)
 
         function createElement(product) {
             let div_product = document.createElement('div');
@@ -331,7 +325,7 @@ function scrollProducts() {
     const container = document.querySelector("div.box-all-products")
     const buttonLeft = document.querySelectorAll("button.button-left");
     const buttonRight = document.querySelectorAll("button.button-right");
-    
+
 
     buttonLeft.forEach(btn => btn.addEventListener("click", () => container.scroll(-300, 0)))
     buttonRight.forEach(btn => btn.addEventListener("click", () => container.scroll(300, 0)))
@@ -365,16 +359,16 @@ function activeBestProducts() {
     const products = document.querySelectorAll(".best-products .box-product");
     const container = document.querySelector(".best-products > div");
 
-    setTimeout(() => container.scroll(100, 0), 100); 
-    
+    setTimeout(() => container.scroll(100, 0), 100);
+
     products.forEach(product => product.addEventListener("mousemove", (e) => {
         products.forEach(p => p.classList.remove("active"))
-        if(e.currentTarget == product) product.classList.add("active")
+        if (e.currentTarget == product) product.classList.add("active")
     }));
 
 
     products.forEach(product => product.addEventListener("mouseout", (e) => {
-        if(e.currentTarget == product) product.classList.remove("active")
+        if (e.currentTarget == product) product.classList.remove("active")
     }));
 
     products.forEach(product => product.addEventListener("click", () => {

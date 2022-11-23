@@ -722,7 +722,7 @@ section.gifts .modal-gift section .content-img .ball.active {
 .products-ball-list .box-product .box-img img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .products-ball-list .box-product .black-just-text {
