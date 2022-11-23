@@ -7,10 +7,11 @@ const global = {};
 
 
 (async function init() {
-    await createHalfListProductHome();
+    createHalfListProductHome()
+    eventNavPixel()
     scrollingTwoPage();
     redirectForTopPage();
-    fillListProductsOffen();
+    await fillListProductsOffen();
     giveGift();
     saveCupom();
     showListProducts();
@@ -19,37 +20,31 @@ const global = {};
     openMobileMenu();
 })();
 
-
-async function createHalfListProductHome() {
-    const products = await getProducts();
-    global.products = products;
-
-    if (products.data.length) {
-        const container = document.querySelector('div.half-products');
-        if (container) {
-
-            let div_product = document.createElement('div');
-            div_product.setAttribute('class', "content-half-product");
-
-            const newProduct = products.data.filter(ob => { return ob.price <= 9.99 })
-
-            for (let n = 0; n < 3; n++) {
-                if (newProduct[n]) {
-                    let div_img = document.createElement('div');
-                    // let img_product = document.createElement('img');
-
-                    div_img.setAttribute('class', "box-half-product");
-                    // img_product.src = transformArrayMySql(newProduct[n].images)[0]
-
-                    // div_img.appendChild(img_product)
-                    div_product.appendChild(div_img)
-                }
-            }
-            container.appendChild(div_product)
-
+function createHalfListProductHome() {
+    const container = document.querySelector('div.half-products');
+    if (container) {
+        let div_product = document.createElement('div');
+        div_product.setAttribute('class', "content-half-product");
+        for (let n = 0; n < 3; n++) {
+            let div_img = document.createElement('div');
+            div_img.setAttribute('class', "box-half-product");
+            div_product.appendChild(div_img)
         }
-    } else console.error("Not have products for show")
+        container.appendChild(div_product)
+    }
 }
+
+function eventNavPixel() {
+    const list = document.querySelectorAll(".trianble-design ~ nav > ul a:not(a:last-of-type)");
+    const aLastType = document.querySelector(".trianble-design ~ nav > ul a:last-of-type");
+
+    list.forEach(l => l.addEventListener("click", () => {
+        fbq('trackCustom', 'use-menu');
+    }));
+
+    aLastType.addEventListener("click", () => fbq('trackCustom', 'btn-to-justdream'))
+}
+
 
 function scrollingTwoPage() {
     const page1 = document.querySelector(".container-page-one");
@@ -91,6 +86,7 @@ function redirectForTopPage() {
 
 async function fillListProductsOffen() {
     const products = global.products ?? await getProducts();
+    global.products = products
 
     if (products.data.length) {
         const container = document.querySelector('div.content-all-products');
@@ -168,6 +164,7 @@ function giveGift() {
             setTimeout(() => {
                 gift.classList.add('boom')
                 setTimeout(() => {
+                    console.log(fbq('trackCustom', 'give_gift'));
                     modal.style.display = "flex"
                 }, 300)
             }, 1500);
@@ -192,6 +189,7 @@ function saveCupom() {
 
     if (!cpm) {
         button.addEventListener("click", () => {
+            fbq('trackCustom', 'clickButtonCopyCupom');
             button.textContent = "Copiado!"
             localStorage.setItem("__cpm", JSON.stringify(["win50", 0]))
         })
@@ -207,6 +205,7 @@ function showListProducts() {
     const gif = document.querySelector("section.gifts .modal-gift")
 
     button.addEventListener("click", () => {
+        fbq('trackCustom', 'btn-useGift');
         gif.style.background = 'none'
         loading().add(button)
         const container = ball.querySelector(".products-ball-list")
@@ -306,6 +305,7 @@ function redirectForProductPage() {
 
     boxProducts.forEach(p => p.addEventListener("click", () => {
         loading().add(p);
+        fbq('trackCustom', 'select-9.90');
         window.location.href = `https://justdream.com.br/product.html?p=${p.querySelector("h2").textContent}&id=${p.id}`
         loading().remove(p)
     }));
@@ -316,6 +316,7 @@ function redirectBallForProductPage() {
 
     boxBallProducts.forEach(p => p.addEventListener("click", () => {
         loading().add(p);
+        fbq('trackCustom', 'SelectOtherProduct');
         window.location.href = `https://justdream.com.br/product.html?p=${p.querySelector("h2").textContent}&id=${p.id}&cpm=available&cpmid=3`
         loading().remove(p)
     }));
@@ -373,6 +374,7 @@ function activeBestProducts() {
 
     products.forEach(product => product.addEventListener("click", () => {
         loading().add(product);
+        fbq('trackCustom', 'SelectBestProduct');
         window.location.href = `https://justdream.com.br/product.html?p=${product.querySelector("h2").textContent}&id=${product.id}&cpm=available&cpmid=3`
         loading().remove(product)
     }));
